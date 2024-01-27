@@ -51,6 +51,7 @@ public class ActivateIntake extends Command {
     @Override
     public void initialize() {
         m_aquisition.deployIntake();
+        
     }
 
     // Called every time the scheduler runs while the command is scheduled.
