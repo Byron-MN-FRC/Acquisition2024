@@ -94,15 +94,18 @@ limitSwitch = new DigitalInput(0);
     // here. Call these from Commands.
 
     public void spinBoth(){
-        if (isNoteCollected() || triggercheck) {
-            bottomShaft.set(0);
-            topShaft.set(0);
-            doubleSolenoid.set(Value.kReverse);  
-        } else {
+        triggercheck = isNoteCollected();
+        if (!triggercheck) {
             bottomShaft.setInverted(true);
             bottomShaft.set(SmartDashboard.getNumber("Speed", .1));
             topShaft.set(SmartDashboard.getNumber("Speed", .1));
             doubleSolenoid.set(Value.kForward);
+            
+        } else if (triggercheck) {
+            bottomShaft.set(0);
+            topShaft.set(0);
+            doubleSolenoid.set(Value .kReverse); 
+            triggercheck = false; 
         }
         
     }
