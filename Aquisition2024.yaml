@@ -11,7 +11,7 @@ Children:
           default: kCoast
           name: Idle Mode
           validators: null
-          value: kCoast
+          value: kBrake
         Inverted: !!robotbuilder.data.properties.BooleanProperty {default: false,
           name: Inverted, validators: null, value: false}
         CAN ID: !!robotbuilder.data.properties.ChoicesProperty
@@ -29,7 +29,7 @@ Children:
           validators: null
           value: kBrushless
         Restore Factory Defaults: !!robotbuilder.data.properties.BooleanProperty {
-          default: true, name: Restore Factory Defaults, validators: null, value: true}
+          default: true, name: Restore Factory Defaults, validators: null, value: false}
       Base: Spark MAX
       Name: bottomShaft
     - Children: []
@@ -39,7 +39,7 @@ Children:
           default: kCoast
           name: Idle Mode
           validators: null
-          value: kCoast
+          value: kBrake
         Inverted: !!robotbuilder.data.properties.BooleanProperty {default: false,
           name: Inverted, validators: null, value: false}
         CAN ID: !!robotbuilder.data.properties.ChoicesProperty
@@ -55,7 +55,7 @@ Children:
           validators: null
           value: kBrushless
         Restore Factory Defaults: !!robotbuilder.data.properties.BooleanProperty {
-          default: true, name: Restore Factory Defaults, validators: null, value: true}
+          default: true, name: Restore Factory Defaults, validators: null, value: false}
       Base: Spark MAX
       Name: topShaft
     - Children: []
@@ -72,7 +72,7 @@ Children:
           default: '0'
           name: Reverse Channel (Solenoid)
           validators: null
-          value: '5'
+          value: '4'
         Forward Module Type (Solenoid): !!robotbuilder.data.properties.ChoicesProperty
           choices: [CTREPCM, REVPH]
           default: CTREPCM
@@ -84,21 +84,31 @@ Children:
           default: '0'
           name: Forward Channel (Solenoid)
           validators: [Solenoid]
-          value: '4'
+          value: '5'
       Base: Double Solenoid
-      Name: doubleSolenoid
+      Name: intakeSolenoid
     - Children: []
       Properties:
         Input Channel (Digital): !!robotbuilder.data.properties.ChoicesProperty
-          choices: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11',
-            '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23',
-            '24', '25']
+          choices: &id005 ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
+            '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22',
+            '23', '24', '25']
           default: '0'
           name: Input Channel (Digital)
-          validators: [DigitalChannel]
+          validators: &id006 [DigitalChannel]
           value: '0'
       Base: Limit Switch
-      Name: limitSwitch
+      Name: noteDetector
+    - Children: []
+      Properties:
+        Input Channel (Digital): !!robotbuilder.data.properties.ChoicesProperty
+          choices: *id005
+          default: '0'
+          name: Input Channel (Digital)
+          validators: *id006
+          value: '1'
+      Base: Limit Switch
+      Name: intakeSwitch
     Properties:
       Send to SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: false,
         name: Send to SmartDashboard, validators: null, value: false}
@@ -151,7 +161,7 @@ Children:
           name: Command
           type: Command
           validators: [TypeDropdownSelected]
-          value: runTopandBottom
+          value: ActivateIntake
         Timeout: !!robotbuilder.data.properties.PositiveDoubleProperty {default: 0,
           name: Timeout, validators: null, value: 0.0}
         Add Timeout: !!robotbuilder.data.properties.BooleanProperty {default: false,
@@ -218,9 +228,9 @@ Children:
         validators: null
         value: []
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
-        name: Button on SmartDashboard, validators: null, value: false}
+        name: Button on SmartDashboard, validators: null, value: true}
     Base: Command
-    Name: runTopandBottom
+    Name: ActivateIntake
   Properties: {}
   Base: Commands
   Name: Commands
@@ -243,10 +253,10 @@ Properties:
   Export Subsystems: !!robotbuilder.data.properties.BooleanProperty {default: true,
     name: Export Subsystems, validators: null, value: true}
   Wiring file location: !!robotbuilder.data.properties.FileProperty {default: 'C:\Users\robotics\',
-    extension: null, folder: true, name: Wiring file location, validators: null, value: 'C:\Users\robotics\'}
+    extension: null, folder: true, name: Wiring file location, validators: null, value: 'C:\FRC_git'}
   Export Directory: !!robotbuilder.data.properties.FileProperty {default: 'C:\Users\robotics\FRCProjects',
     extension: null, folder: true, name: Export Directory, validators: null, value: 'C:\FRC_Git'}
   Autonomous Command: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
     name: Autonomous Command, type: Command, validators: null, value: Autonomous Command}
 Base: Robot
-Name: Aquisition2024
+Name: Acquisition2024
