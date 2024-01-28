@@ -11,6 +11,7 @@
 // ROBOTBUILDER TYPE: Command.
 
 package frc.robot.commands;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import java.util.function.DoubleSupplier;
 
@@ -57,7 +58,7 @@ public class ActivateIntake extends Command {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        m_aquisition.spinBoth();
+        m_aquisition.spinBoth(SmartDashboard.getNumber("Speed", 0.1));
     }
 
     // Called once the command ends or is interrupted.
