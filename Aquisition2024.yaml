@@ -21,7 +21,7 @@ Children:
           default: '2'
           name: CAN ID
           validators: &id003 [CANID]
-          value: '20'
+          value: '22'
         MOTOR TYPE: !!robotbuilder.data.properties.ChoicesProperty
           choices: &id004 [kBrushless, kBrushed]
           default: kBrushless
@@ -66,7 +66,7 @@ Children:
           default: '0'
           name: Forward Module (Solenoid)
           validators: [Solenoid]
-          value: '10'
+          value: '20'
         Reverse Channel (Solenoid): !!robotbuilder.data.properties.ChoicesProperty
           choices: ['0', '1', '2', '3', '4', '5', '6', '7']
           default: '0'
@@ -78,7 +78,7 @@ Children:
           default: CTREPCM
           name: Forward Module Type (Solenoid)
           validators: null
-          value: CTREPCM
+          value: REVPH
         Forward Channel (Solenoid): !!robotbuilder.data.properties.ChoicesProperty
           choices: ['0', '1', '2', '3', '4', '5', '6', '7']
           default: '0'
@@ -96,7 +96,7 @@ Children:
           default: '0'
           name: Input Channel (Digital)
           validators: &id006 [DigitalChannel]
-          value: '0'
+          value: '1'
       Base: Limit Switch
       Name: noteDetector
     - Children: []
@@ -106,7 +106,7 @@ Children:
           default: '0'
           name: Input Channel (Digital)
           validators: *id006
-          value: '1'
+          value: '0'
       Base: Limit Switch
       Name: intakeSwitch
     Properties:
