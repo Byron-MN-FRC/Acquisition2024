@@ -29,7 +29,7 @@ Children:
           validators: null
           value: kBrushless
         Restore Factory Defaults: !!robotbuilder.data.properties.BooleanProperty {
-          default: true, name: Restore Factory Defaults, validators: null, value: false}
+          default: true, name: Restore Factory Defaults, validators: null, value: true}
       Base: Spark MAX
       Name: bottomShaft
     - Children: []
@@ -55,7 +55,7 @@ Children:
           validators: null
           value: kBrushless
         Restore Factory Defaults: !!robotbuilder.data.properties.BooleanProperty {
-          default: true, name: Restore Factory Defaults, validators: null, value: false}
+          default: true, name: Restore Factory Defaults, validators: null, value: true}
       Base: Spark MAX
       Name: topShaft
     - Children: []
@@ -150,7 +150,7 @@ Children:
           validators: null
           value: kBrushless
         Restore Factory Defaults: !!robotbuilder.data.properties.BooleanProperty {
-          default: true, name: Restore Factory Defaults, validators: null, value: false}
+          default: true, name: Restore Factory Defaults, validators: null, value: true}
       Base: Spark MAX
       Name: bottomLeft
     - Children: []
@@ -178,7 +178,7 @@ Children:
           validators: null
           value: kBrushless
         Restore Factory Defaults: !!robotbuilder.data.properties.BooleanProperty {
-          default: true, name: Restore Factory Defaults, validators: null, value: false}
+          default: true, name: Restore Factory Defaults, validators: null, value: true}
       Base: Spark Flex
       Name: topRight
     - Children: []
@@ -204,7 +204,7 @@ Children:
           validators: null
           value: kBrushless
         Restore Factory Defaults: !!robotbuilder.data.properties.BooleanProperty {
-          default: true, name: Restore Factory Defaults, validators: null, value: false}
+          default: true, name: Restore Factory Defaults, validators: null, value: true}
       Base: Spark MAX
       Name: bottomRight
     - Children: []
@@ -230,7 +230,7 @@ Children:
           validators: null
           value: kBrushless
         Restore Factory Defaults: !!robotbuilder.data.properties.BooleanProperty {
-          default: true, name: Restore Factory Defaults, validators: null, value: false}
+          default: true, name: Restore Factory Defaults, validators: null, value: true}
       Base: Spark Flex
       Name: topLeft
     - Children: []
@@ -256,7 +256,7 @@ Children:
           validators: null
           value: kBrushless
         Restore Factory Defaults: !!robotbuilder.data.properties.BooleanProperty {
-          default: true, name: Restore Factory Defaults, validators: null, value: false}
+          default: true, name: Restore Factory Defaults, validators: null, value: true}
       Base: Spark MAX
       Name: bottomRightFollower
     - Children: []
@@ -487,10 +487,10 @@ Children:
       Requires: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
         name: Requires, type: Subsystem, validators: null, value: Spamp}
       Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
-        default: &id015 []
+        default: []
         name: Parameter presets
         validators: null
-        value: *id015
+        value: []
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: true}
     Base: Command
@@ -509,10 +509,10 @@ Children:
       Requires: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
         name: Requires, type: Subsystem, validators: null, value: Spamp}
       Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
-        default: &id016 []
+        default: []
         name: Parameter presets
         validators: null
-        value: *id016
+        value: []
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: true}
     Base: Command
