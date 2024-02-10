@@ -28,5 +28,8 @@ public class Constants {
     *   public static final int kRightMotor2Port = 3; 
     * }
     */ 
+    public static final class MaxRPMConstants {
+        public static final int maxRPMNeo550 = 11000;
+    }
 }
 
