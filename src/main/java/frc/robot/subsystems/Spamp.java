@@ -52,10 +52,12 @@ private DigitalInput noteDetectorSpamp;
     private double bottomRightGearRatio = Constants.MaxRPMConstants.maxRPMNeo550 / 3;
     private double bottomLeftGearRatio = Constants.MaxRPMConstants.maxRPMNeo550 / 10;
 
-    public double bottomRightTargetSpeed;
-    public double bottomLeftTargetSpeed;
-    public double topLeftTargetSpeed;
-    public double topRightTargetSpeed;
+    public double bottomRightSpeed;
+    public double bottomLeftSpeed;
+    public double topLeftSpeed;
+    public double topRightSpeed;
+
+    private boolean transferring;
 
     /**
     *
@@ -125,9 +127,11 @@ noteDetectorSpamp = new DigitalInput(2);
         SmartDashboard.putNumber("TL-Velocity", topLeft.getEncoder().getVelocity());
         SmartDashboard.putNumber("TR-Velocity", topRight.getEncoder().getVelocity());
         SmartDashboard.putBoolean("isNoteInSpamp", isNoteInSpamp());
-        // if (RobotContainer.getInstance().m_aquisition.) {
-        // runBottom();
-        // }
+        if (RobotContainer.getInstance().m_aquisition.readyToTransfer()) {
+            transferring = true;
+            runBottom();
+        }
+
     }
 
     @Override
@@ -139,47 +143,44 @@ noteDetectorSpamp = new DigitalInput(2);
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
     public void runAll() {
-        bottomRightTargetSpeed = SmartDashboard.getNumber("BR-RPM", defaultRPM);
-        bottomLeftTargetSpeed = SmartDashboard.getNumber("BL-RPM", defaultRPM);
-        topRightTargetSpeed = SmartDashboard.getNumber("TR-RPM", defaultRPM);
-        topLeftTargetSpeed = SmartDashboard.getNumber("TL-RPM", defaultRPM);
+        bottomRightSpeed = SmartDashboard.getNumber("BR-RPM", defaultRPM);
+        bottomLeftSpeed = SmartDashboard.getNumber("BL-RPM", defaultRPM);
+        topRightSpeed = SmartDashboard.getNumber("TR-RPM", defaultRPM);
+        topLeftSpeed = SmartDashboard.getNumber("TL-RPM", defaultRPM);
 
-        bottomLeft.set(bottomLeftTargetSpeed / bottomLeftGearRatio);
-        // bottomRightFollower.set(bottomRightTargetSpeed / bottomRightGearRatio);
-        bottomRight.set(bottomRightTargetSpeed / bottomRightGearRatio);
-        topLeft.set(topLeftTargetSpeed / maxRPMVortex);
-        topRight.set(topRightTargetSpeed / maxRPMVortex);
+        bottomLeft.set(bottomLeftSpeed / bottomLeftGearRatio);
+        bottomRight.set(bottomRightSpeed / bottomRightGearRatio);
+        topLeft.set(topLeftSpeed / maxRPMVortex);
+        topRight.set(topRightSpeed / maxRPMVortex);
     }
 
     public void runWaitRun(Timer motorTimer) {
-        bottomRightTargetSpeed = SmartDashboard.getNumber("BR-RPM", defaultRPM);
-        bottomLeftTargetSpeed = SmartDashboard.getNumber("BL-RPM", defaultRPM);
-        topRightTargetSpeed = SmartDashboard.getNumber("TR-RPM", defaultRPM);
-        topLeftTargetSpeed = SmartDashboard.getNumber("TL-RPM", defaultRPM);
+        bottomRightSpeed = SmartDashboard.getNumber("BR-RPM", defaultRPM);
+        bottomLeftSpeed = SmartDashboard.getNumber("BL-RPM", defaultRPM);
+        topRightSpeed = SmartDashboard.getNumber("TR-RPM", defaultRPM);
+        topLeftSpeed = SmartDashboard.getNumber("TL-RPM", defaultRPM);
 
-        topLeft.set(topLeftTargetSpeed / maxRPMVortex);
-        topRight.set(topRightTargetSpeed / maxRPMVortex);
+        topLeft.set(topLeftSpeed / maxRPMVortex);
+        topRight.set(topRightSpeed / maxRPMVortex);
 
         if (motorTimer.hasElapsed(3)) {
-            bottomLeft.set(bottomLeftTargetSpeed / bottomLeftGearRatio);
-            // bottomRightFollower.set(bottomRightTargetSpeed / bottomRightGearRatio);
-            bottomRight.set(bottomRightTargetSpeed / bottomRightGearRatio);
+            bottomLeft.set(bottomLeftSpeed / bottomLeftGearRatio);
+            bottomRight.set(bottomRightSpeed / bottomRightGearRatio);
         }
     }
 
     public void shoot() {
-        topRightTargetSpeed = SmartDashboard.getNumber("TR-RPM", defaultRPM);
-        topLeftTargetSpeed = SmartDashboard.getNumber("TL-RPM", defaultRPM);
+        topRightSpeed = SmartDashboard.getNumber("TR-RPM", defaultRPM);
+        topLeftSpeed = SmartDashboard.getNumber("TL-RPM", defaultRPM);
         bottomLeft.set(1);
         bottomRightFollower.set(1);
         bottomRight.set(1);
-        topLeft.set(topLeftTargetSpeed / maxRPMVortex);
-        topRight.set(topRightTargetSpeed / maxRPMVortex);
+        topLeft.set(topLeftSpeed / maxRPMVortex);
+        topRight.set(topRightSpeed / maxRPMVortex);
     }
 
     public void stopall() {
         bottomLeft.set(0);
-        // bottomRightFollower.set(0);
         bottomRight.set(0);
         topLeft.set(0);
         topRight.set(0);
@@ -190,18 +191,25 @@ noteDetectorSpamp = new DigitalInput(2);
     }
 
     public void runBottom() {
-        bottomLeft.set(.2);
-        bottomRight.set(.2);
+        while (transferring) {
+            bottomLeft.set(.2);
+            bottomRight.set(.2);
+
+            if (!RobotContainer.getInstance().m_aquisition.isNoteInAquisition() & !isNoteInSpamp()) {
+                transferring = false;
+                stopall();
+            }
+        }
     }
 
     public void intakeFromSpamp() {
         if (!isNoteInSpamp()) {
-            bottomRightTargetSpeed = -SmartDashboard.getNumber("BR-RPM", defaultRPM);
-            topRightTargetSpeed = -SmartDashboard.getNumber("TR-RPM", defaultRPM);
-            topLeftTargetSpeed = -SmartDashboard.getNumber("TL-RPM", defaultRPM);
-            bottomRight.set(bottomRightTargetSpeed / bottomRightGearRatio);
-            topLeft.set(topLeftTargetSpeed / maxRPMVortex);
-            topRight.set(topRightTargetSpeed / maxRPMVortex);
+            bottomRightSpeed = -SmartDashboard.getNumber("BR-RPM", defaultRPM);
+            topRightSpeed = -SmartDashboard.getNumber("TR-RPM", defaultRPM);
+            topLeftSpeed = -SmartDashboard.getNumber("TL-RPM", defaultRPM);
+            bottomRight.set(bottomRightSpeed / bottomRightGearRatio);
+            topLeft.set(topLeftSpeed / maxRPMVortex);
+            topRight.set(topRightSpeed / maxRPMVortex);
         } else {
             stopall();
         }
