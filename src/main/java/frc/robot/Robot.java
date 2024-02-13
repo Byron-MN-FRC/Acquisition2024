@@ -54,6 +54,9 @@ public class Robot extends TimedRobot {
         SmartDashboard.putNumber("BR-RPM", RobotContainer.getInstance().m_spamp.defaultRPM);
         SmartDashboard.putNumber("TL-RPM", RobotContainer.getInstance().m_spamp.defaultRPM);
         SmartDashboard.putNumber("TR-RPM", RobotContainer.getInstance().m_spamp.defaultRPM);
+        SmartDashboard.putNumber("Top Shaft RPM", 120);
+        SmartDashboard.putNumber("Bottom Shaft RPM", 120);
+
     }
 
     /**

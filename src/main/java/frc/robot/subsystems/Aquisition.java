@@ -80,6 +80,7 @@ public class Aquisition extends SubsystemBase {
         SmartDashboard.putBoolean("isNoteInAquisition", isNoteInAquisition());
         SmartDashboard.putBoolean("Intake Retracted", isIntakeRetracted());
         SmartDashboard.putBoolean("Intake Out", isIntakeOut());
+        
         // This method will be called once per scheduler run
         if (readyToTransfer()) {
             bottomShaft.set(bottomShaftSpeed / intakeGearRatio);
