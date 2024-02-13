@@ -50,6 +50,7 @@ public class ShootHighSpeaker extends Command {
     @Override
     public void initialize() {
         m_timer.restart();
+        m_spamp.deployShooter();
     }
 
     // Called every time the scheduler runs while the command is scheduled.
@@ -65,6 +66,7 @@ public class ShootHighSpeaker extends Command {
     public void end(boolean interrupted) {
         m_spamp.stopall();
         m_timer.stop();
+        m_spamp.retractShooter();
     }
 
     // Returns true when the command should end.

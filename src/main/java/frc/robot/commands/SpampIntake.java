@@ -50,6 +50,8 @@ public class SpampIntake extends Command {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
+        m_spamp.deployShooter();
+        
     }
 
     // Called every time the scheduler runs while the command is scheduled.
@@ -62,6 +64,7 @@ public class SpampIntake extends Command {
     @Override
     public void end(boolean interrupted) {
         m_spamp.stopall();
+        m_spamp.retractShooter();
     }
 
     // Returns true when the command should end.
