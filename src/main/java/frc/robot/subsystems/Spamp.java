@@ -119,20 +119,39 @@ noteDetectorSpamp = new DigitalInput(2);
     }
 
     @Override
-    public void periodic() {
-        // This method will be called once per scheduler run
-        SmartDashboard.putNumber("BL-Velocity", bottomLeft.getEncoder().getVelocity());
-        SmartDashboard.putNumber("BR-Velocity", bottomRight.getEncoder().getVelocity());
-        SmartDashboard.putNumber("BR-Follower-Velocity", bottomRightFollower.getEncoder().getVelocity());
-        SmartDashboard.putNumber("TL-Velocity", topLeft.getEncoder().getVelocity());
-        SmartDashboard.putNumber("TR-Velocity", topRight.getEncoder().getVelocity());
-        SmartDashboard.putBoolean("isNoteInSpamp", isNoteInSpamp());
-        if (RobotContainer.getInstance().m_aquisition.readyToTransfer()) {
-            transferring = true;
-            runBottom();
-        }
-
-    }
+            public void periodic() {
+                // This method will be called once per scheduler run
+                SmartDashboard.putNumber("BL-Velocity", bottomLeft.getEncoder().getVelocity());
+                SmartDashboard.putNumber("BR-Velocity", bottomRight.getEncoder().getVelocity());
+                SmartDashboard.putNumber("BR-Follower-Velocity", bottomRightFollower.getEncoder().getVelocity());
+                SmartDashboard.putNumber("TL-Velocity", topLeft.getEncoder().getVelocity());
+                SmartDashboard.putNumber("TR-Velocity", topRight.getEncoder().getVelocity());
+                SmartDashboard.putBoolean("isNoteInSpamp", isNoteInSpamp());
+                if (RobotContainer.getInstance().m_aquisition.readyToTransfer()) {
+                    transferring = true;
+                
+                }
+                if (transferring){
+                        runBottom();
+                        if (!RobotContainer.getInstance().m_aquisition.isNoteInAquisition() && 
+                        !isNoteInSpamp()){
+                        stopall();
+                        transferring = false;
+                    }
+                }
+                
+                //if (!RobotContainer.getInstance().m_aquisition.isNoteInAquisition() & !isNoteInSpamp()) {
+                //    transferring = false;
+                //    stopall();
+                //}
+                 
+        
+            }
+            
+    //isNoteInAquisition = aq limit swtch
+    //isNoteInSpamp = spamp limit switch
+    //noteDetectorSpamp = spamp beam break
+    //
 
     @Override
     public void simulationPeriodic() {
@@ -191,15 +210,15 @@ noteDetectorSpamp = new DigitalInput(2);
     }
 
     public void runBottom() {
-        while (transferring) {
+       // while (transferring) {
             bottomLeft.set(.2);
             bottomRight.set(.2);
 
-            if (!RobotContainer.getInstance().m_aquisition.isNoteInAquisition() & !isNoteInSpamp()) {
-                transferring = false;
-                stopall();
-            }
-        }
+         //   if (!RobotContainer.getInstance().m_aquisition.isNoteInAquisition() & !isNoteInSpamp()) {
+         //       transferring = false;
+         //       stopall();
+         //   }
+         //}
     }
 
     public void intakeFromSpamp() {
