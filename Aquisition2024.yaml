@@ -98,7 +98,7 @@ Children:
           validators: &id006 [DigitalChannel]
           value: '1'
       Base: Limit Switch
-      Name: noteDetectorAquisition
+      Name: noteDetector
     - Children: []
       Properties:
         Input Channel (Digital): !!robotbuilder.data.properties.ChoicesProperty
@@ -268,7 +268,7 @@ Children:
           validators: *id006
           value: '2'
       Base: Limit Switch
-      Name: noteDetectorSpamp
+      Name: beamBreak
     Properties:
       Send to SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: false,
         name: Send to SmartDashboard, validators: null, value: false}
