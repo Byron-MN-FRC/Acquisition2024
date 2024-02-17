@@ -118,7 +118,7 @@ public class Spamp extends SubsystemBase {
         SmartDashboard.putNumber("BR-Follower-Velocity", bottomRightFollower.getEncoder().getVelocity());
         SmartDashboard.putNumber("TL-Velocity", topLeft.getEncoder().getVelocity());
         SmartDashboard.putNumber("TR-Velocity", topRight.getEncoder().getVelocity());
-        SmartDashboard.putBoolean("isNoteInSpamp", isNoteInSpamp());
+        SmartDashboard.putBoolean("driver/isNoteInSpamp", isNoteInSpamp());
         // if (RobotContainer.getInstance().m_aquisition.) {
         //     runBottom();
         // }

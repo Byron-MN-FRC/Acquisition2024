@@ -87,7 +87,7 @@ intakeSwitch = new DigitalInput(0);
     @Override
     public void periodic() {
         SmartDashboard.putBoolean("isNoteInAquisition", isNoteInAquisition());
-        SmartDashboard.putBoolean("Intake Retracted", isIntakeRetracted());
+        SmartDashboard.putBoolean("driver/Intake Retracted", isIntakeRetracted());
         // This method will be called once per scheduler run
         if (isIntakeRetracted()) {
             if (isNoteInAquisition()) {
