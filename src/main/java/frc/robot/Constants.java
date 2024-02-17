@@ -31,5 +31,10 @@ public class Constants {
     public static final class MaxRPMConstants {
         public static final int maxRPMNeo550 = 11000;
     }
+    public static final class SpampConstants {
+        public static final int speakerRPM = 500;
+        public static final int ampRPM = 500;
+
+    }
 }
 
