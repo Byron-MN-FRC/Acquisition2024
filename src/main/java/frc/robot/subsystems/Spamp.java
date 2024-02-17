@@ -160,7 +160,7 @@ noteDetectorSpampTop = new DigitalInput(3);
         SmartDashboard.putNumber("BR-Velocity", midLeft.getEncoder().getVelocity());
         SmartDashboard.putNumber("TL-Velocity", topLeft.getEncoder().getVelocity());
         SmartDashboard.putNumber("TR-Velocity", topRight.getEncoder().getVelocity());
-        SmartDashboard.putBoolean("isNoteInSpamp", isNoteInSpamp());
+        SmartDashboard.putBoolean("driver/isNoteInSpamp", isNoteInSpamp());
         SmartDashboard.putBoolean("isReadyToShootSpeaker", isAtRPM(Constants.SpampConstants.speakerRPM));
         SmartDashboard.putBoolean("isReadyToShootAmp", isAtRPM(Constants.SpampConstants.ampRPM));
 

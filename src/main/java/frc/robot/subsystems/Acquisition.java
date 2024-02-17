@@ -83,8 +83,8 @@ topShaft = new PWMSparkMax(1);
     @Override
     public void periodic() {
         SmartDashboard.putBoolean("isNoteInAquisition", isNoteInAcquisition());
-        SmartDashboard.putBoolean("Intake Retracted", isIntakeRetracted());
-        SmartDashboard.putBoolean("Intake Out", isIntakeOut());
+        SmartDashboard.putBoolean("driver/Intake Retracted", isIntakeRetracted());
+        SmartDashboard.putBoolean("driver/Intake Out", isIntakeOut());
         
         // This method will be called once per scheduler run
         if (readyToTransfer()) {
