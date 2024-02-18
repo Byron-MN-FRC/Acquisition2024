@@ -36,8 +36,8 @@ public class Robot extends TimedRobot {
 
     private RobotContainer m_robotContainer;
 
-    //public PneumaticHub ph = new PneumaticHub(20);
-    //Compressor compressor = new Compressor(20, PneumaticsModuleType.REVPH);
+    public PneumaticHub ph = new PneumaticHub(20);
+    Compressor compressor = new Compressor(20, PneumaticsModuleType.REVPH);
 
     /**
      * This function is run when the robot is first started up and should be
@@ -50,6 +50,7 @@ public class Robot extends TimedRobot {
         m_robotContainer = RobotContainer.getInstance();
         HAL.report(tResourceType.kResourceType_Framework, tInstances.kFramework_RobotBuilder);
         enableLiveWindowInTest(true);
+        ph.enableCompressorAnalog(100,120 );
         SmartDashboard.putNumber("BL-RPM", RobotContainer.getInstance().m_spamp.defaultRPM);
         SmartDashboard.putNumber("BR-RPM", RobotContainer.getInstance().m_spamp.defaultRPM);
         SmartDashboard.putNumber("TL-RPM", RobotContainer.getInstance().m_spamp.defaultRPM);
@@ -73,6 +74,8 @@ public class Robot extends TimedRobot {
         // and running subsystem periodic() methods.  This must be called from the robot's periodic
         // block in order for anything in the Command-based framework to work.
         CommandScheduler.getInstance().run();
+        SmartDashboard.putNumber("Pressure", ph.getPressure(0));
+        SmartDashboard.putNumber("PressureLim", 65);
     }
 
 
